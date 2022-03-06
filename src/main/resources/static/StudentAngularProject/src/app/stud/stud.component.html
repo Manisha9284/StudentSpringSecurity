@@ -1,0 +1,172 @@
+
+
+<!--- Modal starts here --><!--- ****************************************** -->
+
+<ng-template #studContent let-c="close" let-d="dismiss">
+   <div class="bg-info">
+       <div class="modal-header">
+         <h4 class="modal-title">Student Info</h4>
+         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+   </div>
+      
+   <div class="col-md-5">
+       <div class="form-group">
+           <label>Student No:</label>
+           <input type="text" class="form-control"   [(ngModel)]="studObj.sno">
+       </div>
+   </div>
+
+   <div class="col-md-5">
+       <div class="form-group">
+           <label>Student Name:</label>
+           <input type="text" class="form-control"  [(ngModel)]="studObj.sname">
+       </div>
+   </div>
+
+   <div class="col-md-5">
+       <div class="form-group">
+           <label>Student Age:</label>
+           <input type="text" class="form-control"  [(ngModel)]="studObj.age">
+       </div>
+   </div>
+   
+   <div class="modal-footer" >
+               <button type="button" class="btn btn-success" (click)="c('Close click');save()">Save</button>
+   </div>
+   
+</ng-template>
+<!--- ****************************************** -->
+<!--- Modal ends here -->
+
+
+
+<br>
+
+<!-- <table border="1" align="center">
+
+   <tr>
+    <th>Student No</th>
+    <th>Student Name</th>
+    <th>Student Age</th>
+    <th>Update</th>
+    <th>Delete</th>
+   </tr>
+
+   <tr *ngFor="let stud of students">
+    <td>{{stud.sno}}</td>
+    <td>{{stud.sname}}</td>
+    <td>{{stud.age}}</td>
+    <td><button (click)="update(stud.sno); openPopUp(studContent)">Update</button></td>
+    <td><button (click)="delete(stud.sno)">Delete</button></td>
+   </tr>
+
+</table> -->
+
+<br>
+
+<!-- <input type="text" [(ngModel)]="studObj.sno" placeholder="Enter Student No"><br>
+<input type="text" [(ngModel)]="studObj.sname" placeholder="Enter Student Name"><br>
+<input type="text" [(ngModel)]="studObj.age" placeholder="Enter Student Age"><br>
+<button (click)="save()">Save</button>
+<button (click)="edit()">Edit</button> -->
+
+
+ <div class="container">
+   <div class="text-center">
+     <button class="btn btn-outline-primary" (click)="openPopUp(studContent);add()">Add New Student</button>
+   </div>
+   <br><br>
+ <div class="mat-elevation-z8">
+
+  <style>
+     
+table{
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 400px;
+    }
+
+th  {
+      background-color: #009879;
+      color: #ffffff;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.4em;
+      margin-top: 20px;
+    }
+    
+     td{
+      padding: 10px 20px;
+      margin-bottom: 50px;
+     }
+     
+     tbody tr{
+       border-bottom: 1px solid #dddddd;
+       margin-bottom: 50px;
+     }
+
+     tbody tr:nth-of-type(even) {
+       background-color: #f3f3f3;
+     }
+     
+</style>
+
+<div class="text-center">
+  <mat-form-field>
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+   </mat-form-field>
+  </div>
+<br>
+   <table mat-table [dataSource]="dataSource" class="table table-dark, table table-striped">
+     
+     <!-- SNO Column -->
+     <ng-container matColumnDef="sno">
+       <th mat-header-cell *matHeaderCellDef> Student Number </th>
+       <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+     </ng-container>
+ 
+     <!-- SName Column -->
+     <ng-container matColumnDef="sname">
+       <th mat-header-cell *matHeaderCellDef> Student Name </th>
+       <td mat-cell *matCellDef="let element"> {{element.sname}} </td>
+     </ng-container>
+ 
+     <!-- Age Column -->
+     <ng-container matColumnDef="age">
+       <th mat-header-cell *matHeaderCellDef> Student Age </th>
+       <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+     </ng-container>
+ 
+     <!-- Update Column -->
+     <ng-container matColumnDef="update">
+       <th mat-header-cell *matHeaderCellDef> Update </th>
+       <td mat-cell *matCellDef="let element"> <button (click)="update(element.sno);openPopUp(studContent)">Update</button> </td>
+       <!-- <td mat-cell *matCellDef="let element"> {{element.age}} </td> -->
+    </ng-container>
+ 
+   <!-- Delete Column -->
+     <ng-container matColumnDef="delete">
+         <th mat-header-cell *matHeaderCellDef> Delete </th>
+         <td mat-cell *matCellDef="let element"> <button (click)="delete(element.sno)">Delete</button> </td>
+         <!-- <td mat-cell *matCellDef="let element"> {{element.age}} </td> -->
+      </ng-container>
+ 
+      <!-- Image -->
+     <ng-container matColumnDef="img">
+       <th mat-header-cell *matHeaderCellDef>  </th>
+       <td mat-cell *matCellDef="let element"> <img src="/assets/photos/One.jpg" width="30" height="30"> </td>
+     </ng-container>
+   
+ 
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+ 
+   <mat-paginator [pageSizeOptions]="[5, 10, 20, 25]" showFirstLastButtons></mat-paginator>
+ </div>
+ </div>
+

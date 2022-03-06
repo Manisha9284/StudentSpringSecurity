@@ -1,0 +1,13 @@
+<p>upload works!</p>
+
+<span style="color:red;" *ngIf="message">{{message}}</span>
+
+<p>
+  <img [src]="imgURL" height="100" length="100" *ngIf="imgURL">
+</p>
+
+<input #file type="file" accept='image/*' (change)="preview(file.files)" />
+<br>
+<button  (click)="upload()">Upload</button>
+<br>
+<button  (click)="delete()">Delete</button>
